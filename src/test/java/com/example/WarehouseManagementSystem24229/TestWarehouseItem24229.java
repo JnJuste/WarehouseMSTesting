@@ -25,7 +25,11 @@ import static org.junit.jupiter.api.Assertions.*;
 public class TestWarehouseItem24229 {
 
     @Autowired
-    private WarehouseServiceInterface warehouseServiceInterface; // Injecting the WarehouseServiceInterface bean
+    private final WarehouseServiceInterface warehouseServiceInterface; // Injecting the WarehouseServiceInterface bean
+
+    public TestWarehouseItem24229(WarehouseServiceInterface warehouseServiceInterface) {
+        this.warehouseServiceInterface = warehouseServiceInterface;
+    }
 
     /**
      * Test to verify the save functionality of a Warehouse item.
@@ -61,9 +65,7 @@ public class TestWarehouseItem24229 {
         ware.setDateAdded(LocalDate.of(2023, 2, 1));
         ware.setDateUpdated(LocalDate.of(2023, 12, 1));
 
-        Exception exception = assertThrows(Exception.class, () -> {
-            warehouseServiceInterface.warehouseItemSave(ware);
-        });
+        Exception exception = assertThrows(Exception.class, () -> warehouseServiceInterface.warehouseItemSave(ware));
 
         assertNotNull(exception, "Expected an exception when saving an item with a null code.");
     }
