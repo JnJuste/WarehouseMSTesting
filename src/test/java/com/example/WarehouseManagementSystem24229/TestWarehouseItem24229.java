@@ -32,7 +32,7 @@ public class TestWarehouseItem24229 {
      */
     @Test
     @Order(1)
-    public void testSaveItem() {
+    public void testSaveItemPositive() {
         Warehouse ware = new Warehouse();
         ware.setItemCode("1");
         ware.setItemName("Rice");
@@ -47,10 +47,32 @@ public class TestWarehouseItem24229 {
     }
 
     /**
-     * Positive Test to verify the find functionality of a Warehouse item by its code.
+     * Negative Test to verify save functionality fails for invalid Warehouse item.
      */
     @Test
     @Order(2)
+    public void testSaveItemNegative() {
+        Warehouse ware = new Warehouse();
+        ware.setItemCode(null); // Invalid: Item code is required
+        ware.setItemName("Sugar");
+        ware.setType("Sweetener");
+        ware.setQuantity(200);
+        ware.setPrice(BigDecimal.valueOf(800));
+        ware.setDateAdded(LocalDate.of(2023, 2, 1));
+        ware.setDateUpdated(LocalDate.of(2023, 12, 1));
+
+        Exception exception = assertThrows(Exception.class, () -> {
+            warehouseServiceInterface.warehouseItemSave(ware);
+        });
+
+        assertNotNull(exception, "Expected an exception when saving an item with a null code.");
+    }
+
+    /**
+     * Positive Test to verify the find functionality of a Warehouse item by its code.
+     */
+    @Test
+    @Order(3)
     public void testFindItemByCodePositive() {
         Warehouse warehouse = warehouseServiceInterface.findWarehouseItemByCode("1");
         assertEquals("Cereals", warehouse.getType()); // Asserts that the item Type is as expected
@@ -61,7 +83,7 @@ public class TestWarehouseItem24229 {
      * Negative Test to verify the find functionality of a Warehouse item by its code.
      */
     @Test
-    @Order(3)
+    @Order(4)
     public void testFindItemByCodeNegative() {
         Warehouse warehouse = warehouseServiceInterface.findWarehouseItemByCode("9999"); // Non-existent code
         assertNull(warehouse, "Expected no item to be found for a non-existent code.");
@@ -71,7 +93,7 @@ public class TestWarehouseItem24229 {
      * Positive Test to verify the retrieval of all Warehouse items.
      */
     @Test
-    @Order(4)
+    @Order(5)
     public void testFindAllPositive() {
         List<Warehouse> warehouses = warehouseServiceInterface.findAllWarehouseItems();
         assertEquals(1, warehouses.size()); // Asserts that there is exactly one Warehouse item
@@ -81,7 +103,7 @@ public class TestWarehouseItem24229 {
      * Negative Test to verify the retrieval of all Warehouse items.
      */
     @Test
-    @Order(5)
+    @Order(6)
     public void testFindAllNegative() {
         List<Warehouse> warehouses = warehouseServiceInterface.findAllWarehouseItems();
         assertNotEquals(0, warehouses.size(), "Expected the warehouse list to not be empty.");
@@ -91,7 +113,7 @@ public class TestWarehouseItem24229 {
      * Positive Test to verify the update functionality of a Warehouse item.
      */
     @Test
-    @Order(6)
+    @Order(7)
     public void testUpdateItemPositive() {
         Warehouse warehouse = warehouseServiceInterface.updatedWarehouseItem("1", "Beans");
         assertEquals("Beans", warehouse.getItemName()); // Asserts that the item name was successfully updated
@@ -101,7 +123,7 @@ public class TestWarehouseItem24229 {
      * Negative Test to verify the update functionality of a Warehouse item.
      */
     @Test
-    @Order(7)
+    @Order(8)
     public void testUpdateItemNegative() {
         Warehouse warehouse = warehouseServiceInterface.updatedWarehouseItem("9999", "Beans"); // Non-existent code
         assertNull(warehouse, "Expected no update for a non-existent item code.");
@@ -111,7 +133,7 @@ public class TestWarehouseItem24229 {
      * Positive Test to verify the delete functionality of a Warehouse item.
      */
     @Test
-    @Order(8)
+    @Order(9)
     public void testDeleteItemPositive() {
         warehouseServiceInterface.deleteWarehouseItem("1");
         Warehouse warehouse = warehouseServiceInterface.findWarehouseItemByCode("1");
@@ -123,7 +145,7 @@ public class TestWarehouseItem24229 {
      * Negative Test to verify the delete functionality of a Warehouse item.
      */
     @Test
-    @Order(9)
+    @Order(10)
     public void testDeleteItemNegative() {
         // Attempt to delete a non-existent item
         boolean isDeleted = warehouseServiceInterface.deleteWarehouseItem("9999"); // Assume "9999" does not exist
