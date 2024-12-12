@@ -25,11 +25,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class TestWarehouseItem24229 {
 
     @Autowired
-    private final WarehouseServiceInterface warehouseServiceInterface; // Injecting the WarehouseServiceInterface bean
-
-    public TestWarehouseItem24229(WarehouseServiceInterface warehouseServiceInterface) {
-        this.warehouseServiceInterface = warehouseServiceInterface;
-    }
+    private WarehouseServiceInterface warehouseServiceInterface; // Injecting the WarehouseServiceInterface bean
 
     /**
      * Test to verify the save functionality of a Warehouse item.
