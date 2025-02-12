@@ -2,6 +2,7 @@ package com.example.WarehouseManagementSystem24229;
 
 import com.example.WarehouseManagementSystem24229.model.Warehouse;
 import com.example.WarehouseManagementSystem24229.service.WarehouseServiceInterface;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
@@ -25,6 +26,7 @@ class WarehouseServiceUnitTest {
     }
 
     @Test
+    @Order(1)
     void testSaveItem() {
         // Arrange
         Warehouse warehouse = new Warehouse();
@@ -48,6 +50,7 @@ class WarehouseServiceUnitTest {
     }
 
     @Test
+    @Order(2)
     void testFindItemByCode() {
         // Arrange
         Warehouse warehouse = new Warehouse();
@@ -66,6 +69,7 @@ class WarehouseServiceUnitTest {
     }
 
     @Test
+    @Order(3)
     void testFindAllItems() {
         // Arrange
         Warehouse item1 = new Warehouse();
@@ -90,6 +94,7 @@ class WarehouseServiceUnitTest {
     }
 
     @Test
+    @Order(4)
     void testUpdateItem() {
         // Arrange
         Warehouse updatedWarehouse = new Warehouse();
@@ -108,6 +113,7 @@ class WarehouseServiceUnitTest {
     }
 
     @Test
+    @Order(5)
     void testDeleteItem() {
         // Arrange
         when(warehouseService.deleteWarehouseItem("1")).thenReturn(true);
