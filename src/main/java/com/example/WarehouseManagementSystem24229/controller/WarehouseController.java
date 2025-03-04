@@ -78,9 +78,9 @@ public class WarehouseController {
         return new ResponseEntity<>("Items retrieved successfully.", HttpStatus.OK);
     }
 
-    // 4. PUT Method (To Update Ticket Information By ID - Positive)
+    // 4. PUT Method (To Update Item Information By ID - Positive)
     @PutMapping("/update/{id}")
-    public ResponseEntity<Warehouse> updateTicket(@PathVariable("id") String id, @RequestBody Warehouse warehouse) {
+    public ResponseEntity<Warehouse> updateItem(@PathVariable("id") String id, @RequestBody Warehouse warehouse) {
         Warehouse existingItem = warehouseServiceInterface.findWarehouseItemByCode(id);
         if (existingItem != null) {
             Warehouse updatedItem = new Warehouse();
@@ -97,9 +97,9 @@ public class WarehouseController {
         }
     }
 
-    // 4.1. PUT Method (To Update Ticket Information By ID - Negative)
+    // 4.1. PUT Method (To Update Item Information By ID - Negative)
     @PutMapping("/update-invalid/{id}")
-    public ResponseEntity<String> updateInvalidTicket(@PathVariable("id") String id, @RequestBody Warehouse warehouse) {
+    public ResponseEntity<String> updateInvalidItem(@PathVariable("id") String id, @RequestBody Warehouse warehouse) {
         try {
             Warehouse existingItem = warehouseServiceInterface.findWarehouseItemByCode(id);
             if (existingItem == null) {
@@ -112,19 +112,21 @@ public class WarehouseController {
     }
 
     // 5. DELETE Method (Delete Item By ID - Positive)
+    // 5. DELETE Method (Delete Item By ID - Positive)
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<HttpStatus> deleteTicket(@PathVariable("id") Integer id) {
+    public ResponseEntity<String> deleteItem(@PathVariable("id") Integer id) {
         try {
             warehouseServiceInterface.deleteWarehouseItem(String.valueOf(id));
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>("Item deleted successfully.", HttpStatus.OK);
         } catch (Exception ex) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("Error occurred while deleting the item.", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
+
     // 5.1. DELETE Method (Delete Item By ID - Negative)
     @DeleteMapping("/delete-invalid/{id}")
-    public ResponseEntity<String> deleteInvalidTicket(@PathVariable("id") Integer id) {
+    public ResponseEntity<String> deleteInvalidItem(@PathVariable("id") Integer id) {
         try {
             boolean isDeleted = warehouseServiceInterface.deleteWarehouseItem(String.valueOf(id));
             if (!isDeleted) {
