@@ -22,7 +22,7 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 @SpringBootTest
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-public class TestWarehouseItem24229 {
+public class TestWarehouseItemJUnit {
 
     @Autowired
     private WarehouseServiceInterface warehouseServiceInterface; // Injecting the WarehouseServiceInterface bean

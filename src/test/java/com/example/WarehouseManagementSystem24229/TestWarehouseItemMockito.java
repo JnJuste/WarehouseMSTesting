@@ -11,17 +11,16 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-class WarehouseServiceUnitTest {
+class TestWarehouseItemMockito {
 
     @Mock
     private WarehouseServiceInterface warehouseService; // Mock the service
 
-    private WarehouseServiceUnitTest() {
+    private TestWarehouseItemMockito() {
         MockitoAnnotations.openMocks(this); // Initialize mocks
     }
 

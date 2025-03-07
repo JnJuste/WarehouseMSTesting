@@ -110,8 +110,7 @@ public class WarehouseController {
             return new ResponseEntity<>("Error while updating the item.", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
-    // 5. DELETE Method (Delete Item By ID - Positive)
+    
     // 5. DELETE Method (Delete Item By ID - Positive)
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> deleteItem(@PathVariable("id") Integer id) {
